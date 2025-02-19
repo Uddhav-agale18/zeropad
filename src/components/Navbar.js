@@ -1,35 +1,32 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Bars3Icon, XMarkIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../Images/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-gradient-to-r from-white to-purple-200 shadow-md">
+    <nav className="bg-gradient-to-r from-white to-white shadow-md">
       <div className="max-w-screen-xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <img src={logo} alt="Logo" className="h-12 w-32 transition-transform duration-300 hover:scale-105" />
         </Link>
 
-        {/* Mobile Toggle Button */}
-        <button className="lg:hidden text-black focus:outline-none" onClick={() => setIsOpen(!isOpen)}>
+        {/* Mobile Toggle Button (Three Lines / X Icon) */}
+        <button className="lg:hidden text-black focus:outline-none z-50" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <XMarkIcon className="h-8 w-8" /> : <Bars3Icon className="h-8 w-8" />}
         </button>
 
-        {/* Mobile Menu (Opens from Right) */}
+        {/* Mobile Sidebar */}
         <div
-          className={`lg:hidden fixed top-0 right-0 w-3/4 sm:w-1/2 h-full bg-white shadow-lg transform ${
+          className={`lg:hidden fixed top-0 right-0 w-3/4 sm:w-1/2 min-h-screen bg-white shadow-lg z-40 transition-transform duration-500 ease-in-out ${
             isOpen ? "translate-x-0" : "translate-x-full"
-          } transition-transform duration-500 ease-in-out`}
+          }`}
         >
-          <button className="absolute top-4 right-4 text-gray-700" onClick={() => setIsOpen(false)}>
-            <XMarkIcon className="h-8 w-8" />
-          </button>
-
-          <ul className="flex flex-col items-center mt-16 space-y-6 text-gray-700">
+          {/* Sidebar Menu */}
+          <ul className="flex flex-col items-center mt-16 space-y-6 text-bold text-gray-700">
             {["Home", "About", "Product", "Community", "Corporate", "Contact"].map((item, index) => (
               <li key={index}>
                 <Link
@@ -52,12 +49,10 @@ const Navbar = () => {
             </Link>
           ))}
         </div>
-
-        {/* User Profile Icon */}
-        <div className="hidden lg:flex items-center">
-          <UserCircleIcon className="h-10 w-10 text-black transition-transform duration-300 hover:scale-110 cursor-pointer" />
-        </div>
       </div>
+
+      {/* Overlay for Mobile Sidebar */}
+      {isOpen && <div className="fixed inset-0 bg-black opacity-50 z-30 lg:hidden" onClick={() => setIsOpen(false)}></div>}
     </nav>
   );
 };
