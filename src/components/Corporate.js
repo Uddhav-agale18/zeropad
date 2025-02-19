@@ -1,7 +1,7 @@
 import React from 'react';
-import CO1 from "../Images/co1.jpg"; // Vision image
-import CO2 from "../Images/co2.jpg"; // Mission image
-import pinkBackground from "../Images/pinkbaground.png"; // Background image
+import CO1 from "../Images/co1.jpg"; 
+import CO2 from "../Images/co2.jpg"; 
+import pinkBackground from "../Images/pinkbaground.png"; 
 
 const Corporate = () => {
     return (
