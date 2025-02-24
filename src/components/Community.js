@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CommunityImage from './images/Community1.png';
 import CommunityImage2 from './images/community2.png';
 import Story1 from './images/blog_2 1.png'; // Correct import
+import { Instagram,  Youtube } from 'lucide-react';
 import initiatives1 from './images/initiatives1.png'; 
 import initiatives2 from './images/initiative2.png'; 
 import character1 from './images/character1.png'; 
@@ -11,7 +12,12 @@ import { Play } from 'lucide-react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-
+import Instagram1 from '../Images/Gallery/Rectangle 241.png';
+import Instagram2 from '../Images/Gallery/Rectangle 247.png';
+import logo from '../Images/Gallery/logo.png';
+import ig1 from '../Images/Gallery/igImage2.png';
+import ig2 from '../Images/Gallery/igImage1.png';
+import Thread from '../Images/Thread.png';
 
  
 
@@ -108,11 +114,14 @@ const Community = () => {
           { id: 2, title: "Breaking Myths Around Periods" },
           { id: 3, title: "Best Nutrition Tips During Periods" },
         ],
+        infographs:[
+
+        ]
       };
     
         const [activeTab, setActiveTab] = useState("videos");
 
-
+        const [currentTab, setCurrentTab] = useState("instagram");
         // const [selectedSession, setSelectedSession] = useState(null);
 
   // // Function to handle button click
@@ -131,12 +140,62 @@ const Community = () => {
 
 
 
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedSession, setSelectedSession] = useState('');
   
-  const handleSessionSelect = (session) => {
-    setSelectedSession(session);
+
+  const [formData, setFormData] = useState({
+    fullName: '',
+    companyName: '',
+    mobile: '',
+    address: '',
+    selectedDate: null,
+    selectedSession: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const handleSessionSelect = (session) => {
+    setFormData((prev) => ({ ...prev, selectedSession: session }));
+  };
+
+  const isFormValid = 
+    formData.fullName.trim() !== '' &&
+    formData.companyName.trim() !== '' &&
+    formData.mobile.trim() !== '' &&
+    formData.address.trim() !== '' &&
+    formData.selectedDate !== null &&
+    formData.selectedSession !== '';
+
+  const handleSubmit = () => {
+    if (isFormValid) {
+      // Handle form submission
+      console.log('Form submitted:', formData);
+    }
+  };
+
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formErrors, setFormErrors] = useState([]);
+
+
+
+  
+    const [active, setActive] = useState(null);
+  
+    const handleClick = (icon) => {
+      setActive(icon);
+    };
+  
+    const iconStyle = (icon) =>
+      `p-2 rounded-full flex items-center justify-center w-[40px] h-[40px] transition-all duration-300 ${
+        active === icon
+          ? "bg-white border-4 border-[#FB6F92] scale-110"
+          : "bg-[#FB6F92]"
+      }`;
+
+
+
 
 
   return (
@@ -253,54 +312,39 @@ const Community = () => {
   <section id="community-initiatives" className="relative mt-24 pb-24 py-12">
   {/* Image Above Tilted Background (Left Side) */}
   <div className="absolute left-0 top-[-50px] w-auto text-left">
-    <div className="relative w-[90%] max-w-[300px] md:max-w-[400px] ml-[-10px] md:ml-[-20px]">
+    <div className="relative w-[100%] max-w-[500px] md:max-w-[400px] ml-0 md:ml-0">
       {/* Image */}
       <img src={CommunityImage2} alt="Community Awareness" className="w-full h-auto rounded-lg" />
-      {/* Centered Heading Over Image */}
-      <h2 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-        text-[clamp(16px, 4vw, 32px)] lg:text-4xl xl:text-5xl font-bold text-black 
-        px-2 sm:px-4 py-1 sm:py-2 rounded-md max-w-[90%] whitespace-nowrap text-center mt-6 sm:mt-8 md:mt-10">
+      {/* Left-Aligned Heading Over Image */}
+      <h2 className="absolute top-1/2 left-4 transform -translate-y-1/2 text-[clamp(16px, 4vw, 24px)] lg:text-3xl xl:text-4xl font-bold text-black px-2 sm:px-4 py-1 sm:py-2 rounded-md max-w-[90%] whitespace-nowrap text-left mt-6 sm:mt-8 md:mt-10">
         User Community Initiatives
       </h2>
     </div>
   </div>
 
   {/* Tilted Background */}
-  <div className="absolute top-[calc(100px+15vw)] md:top-[calc(150px+15vw)] left-0 w-full bg-[#FB6F92] 
-    transform -skew-y-12 origin-top-left z-[-1] min-h-[calc(100vh+10vw)] md:min-h-[calc(120vh+10vw)] relative">
-    
+  <div className="absolute top-[calc(100px+15vw)] md:top-[calc(150px+15vw)] left-0 w-full bg-[#FB6F92] transform -skew-y-12 origin-top-left z-[-1] min-h-[calc(100vh+10vw)] md:min-h-[calc(120vh+10vw)] relative">
+
     {/* Bottom-Left Character Inside Tilted Background */}
-    <div className="absolute bottom-0 left-0 lg:left-8 
-                w-[clamp(60px, 16vw, 220px)] max-w-[220px] hidden lg:block">
-  <img src={character2} alt="Character" className="w-full h-auto" />
-</div>
-
-
-
+    <div className="absolute bottom-[-49px] left-0 lg:left-8 w-[clamp(60px, 16vw, 220px)] max-w-[220px] hidden lg:block rotate-12">
+      <img src={character2} alt="Character" className="w-full h-auto" />
+    </div>
   </div>
 
-  {/* Top-Right Character - Always at 0px from the Tilted Background */}
-  <div className="absolute top-0 right-0 sm:right-4 md:right-6 lg:right-8 w-[clamp(60px, 16vw, 220px)] max-w-[220px]">
-  <img src={character1} alt="Character" className="w-full h-auto" />
-</div>
+  {/* Top-Right Character - Moved Up and Slightly Behind */}
+  <div className="absolute top-[-45px] right-0 sm:right-4 md:right-6 lg:right-8 w-[clamp(60px, 16vw, 220px)] max-w-[220px] z-10">
+    <img src={character1} alt="Character" className="w-full h-auto" />
+  </div>
 
   {/* Content Container Inside Tilted Background */}
-  <div className="absolute top-[calc(100px+18vw)] md:top-[calc(150px+5vw)] left-1/2 
-    transform -translate-x-1/2 w-full max-w-[1328px] px-4 sm:px-6 lg:px-8 z-10 
-    pt-12 md:pt-16 pb-12 md:pb-20">
-    
+  <div className="absolute top-[calc(100px+18vw)] md:top-[calc(150px+5vw)] left-1/2 transform -translate-x-1/2 w-full max-w-[1328px] px-4 sm:px-6 lg:px-8 z-10 pt-12 md:pt-16 pb-12 md:pb-20">
+
     {/* First Row */}
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
       <div className="flex justify-center md:justify-start w-full">
-      <div className="flex justify-center lg:justify-start">
-      <div className="flex justify-center lg:justify-start w-full">
-  <div className="relative w-full max-w-[600px] sm:w-[80%] md:w-[65%] lg:w-[80%] aspect-[7/5] lg:ml-0">
-    <img src={initiatives1} alt="Initiative 1" className="w-full h-full object-cover rounded-lg shadow-lg" />
-  </div>
-</div>
-
-</div>
-
+        <div className="relative w-full max-w-[400px] sm:w-[70%] md:w-[60%] lg:w-[70%] aspect-[7/5]">
+          <img src={initiatives1} alt="Initiative 1" className="w-full h-full object-cover rounded-lg shadow-lg" />
+        </div>
       </div>
       <div className="flex flex-col gap-4 md:gap-6 text-white text-center md:text-left w-full">
         <div className="px-4">
@@ -327,13 +371,15 @@ const Community = () => {
         </div>
       </div>
       <div className="flex justify-center md:justify-end w-full">
-        <div className="relative w-full max-w-[600px] sm:w-[80%] md:w-[65%] lg:w-[80%] aspect-[7/5]">
+        <div className="relative w-full max-w-[400px] sm:w-[70%] md:w-[60%] lg:w-[70%] aspect-[7/5]">
           <img src={initiatives2} alt="Initiative 4" className="w-full h-full object-cover rounded-lg shadow-lg" />
         </div>
       </div>
     </div>
-  </div>   
+  </div>
 </section>
+
+
 
 
 
@@ -344,112 +390,128 @@ const Community = () => {
       </h2>
 
       <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
-        {/* Details Section */}
         <div className="col-span-1 flex flex-col gap-8">
-          <input 
-            type="text" 
-            placeholder="Full Name*" 
-            className="p-4 bg-gray-50 border border-gray-200 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fb6f92] focus:border-transparent" 
-          />
-          <input 
-            type="text" 
-            placeholder="Company Name*" 
-            className="p-4 bg-gray-50 border border-gray-200 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fb6f92] focus:border-transparent" 
-          />
-          <input 
-            type="text" 
-            placeholder="Mobile/Landline*" 
-            className="p-4 bg-gray-50 border border-gray-200 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fb6f92] focus:border-transparent" 
-          />
-          <input 
-            type="text" 
-            placeholder="Address*" 
-            className="p-4 bg-gray-50 border border-gray-200 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fb6f92] focus:border-transparent" 
-          />
+          {['fullName', 'companyName', 'mobile', 'address'].map((field, idx) => (
+            <input
+              key={idx}
+              type="text"
+              name={field}
+              placeholder={`${field.split(/(?=[A-Z])/).join(' ')}*`}
+              value={formData[field]}
+              onChange={handleChange}
+              className={`p-4 bg-gray-50 border rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fb6f92] focus:border-transparent ${formErrors.includes(field) ? 'border-red-500' : 'border-gray-200'}`}
+            />
+          ))}
         </div>
 
-        {/* Date Selection */}
         <div className="flex flex-col items-center space-y-4">
-      {/* Header Title */}
-      <h3 className="text-2xl font-semibold text-center">Select Date</h3>
-
-      {/* Date Picker Container */}
-      <div className="bg-white p-4 rounded-lg ">
-        <DatePicker
-          selected={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
-          minDate={new Date()}
-          inline
-          renderCustomHeader={({
-            date,
-            decreaseMonth,
-            increaseMonth,
-            prevMonthButtonDisabled,
-            nextMonthButtonDisabled,
-          }) => (
-            <div className="flex items-center justify-between w-full px-4 py-2">
-              <button
-                onClick={decreaseMonth}
-                disabled={prevMonthButtonDisabled}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-[#FB6F92] text-white disabled:opacity-50"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <div className="text-xl font-medium">
-                {date.toLocaleString("default", { month: "long", year: "numeric" })}
-              </div>
-              <button
-                onClick={increaseMonth}
-                disabled={nextMonthButtonDisabled}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-[#FB6F92] text-white disabled:opacity-50"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
+          <h3 className="text-2xl font-semibold text-center">Select Date</h3>
+          {formData.selectedDate && (
+            <p className="text-lg font-medium text-gray-700">
+              Selected Date: {formData.selectedDate.toLocaleDateString()}
+            </p>
           )}
-          calendarClassName="!border-0 !font-sans"
-          wrapperClassName="!block"
-          dayClassName={(date) =>
-            date.getDate() === selectedDate?.getDate() &&
-            date.getMonth() === selectedDate?.getMonth()
-              ? "!bg-[#FB6F92] !text-white !rounded-full"
-              : "hover:!bg-gray-200 !rounded-full"
-          }
-        />
-      </div>
-    </div>
+          <div className="bg-white p-4 rounded-lg">
+            <DatePicker
+              selected={formData.selectedDate}
+              onChange={(date) => setFormData({ ...formData, selectedDate: date })}
+              minDate={new Date()}
+              inline
+              renderCustomHeader={({
+                date,
+                decreaseMonth,
+                increaseMonth,
+                prevMonthButtonDisabled,
+                nextMonthButtonDisabled,
+              }) => (
+                <div className="flex items-center justify-between w-full px-4 py-2">
+                  <button
+                    onClick={decreaseMonth}
+                    disabled={prevMonthButtonDisabled}
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-[#FB6F92] text-white disabled:opacity-50"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <div className="text-xl font-medium">
+                    {date.toLocaleString('default', { month: 'long', year: 'numeric' })}
+                  </div>
+                  <button
+                    onClick={increaseMonth}
+                    disabled={nextMonthButtonDisabled}
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-[#FB6F92] text-white disabled:opacity-50"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
+              )}
+              calendarClassName="!border-0 !font-sans"
+              wrapperClassName="!block"
+              dayClassName={(date) =>
+                date.getDate() === formData.selectedDate?.getDate() && date.getMonth() === formData.selectedDate?.getMonth()
+                  ? '!bg-[#FB6F92] !text-white !rounded-full'
+                  : 'hover:!bg-gray-200 !rounded-full'
+              }
+            />
+          </div>
+        </div>
 
-        {/* Session Type */}
         <div className="col-span-1 flex flex-col items-center gap-8">
           <h3 className="text-lg font-semibold">Preferred Session Type</h3>
-          <button
-            className={`w-36 p-4 border-2 rounded-full transition-all duration-300 ${
-              selectedSession === 'In-Person' 
-                ? 'bg-[#fb6f92] text-white border-[#fb6f92]' 
-                : 'border-[#fb6f92] text-[#fb6f92] hover:bg-[#fb6f92]/10'
-            }`}
-            onClick={() => handleSessionSelect('In-Person')}
-          >
-            In-Person
-          </button>
-          <button
-            className={`w-36 p-4 border-2 rounded-full transition-all duration-300 ${
-              selectedSession === 'Virtual' 
-                ? 'bg-[#fb6f92] text-white border-[#fb6f92]' 
-                : 'border-[#fb6f92] text-[#fb6f92] hover:bg-[#fb6f92]/10'
-            }`}
-            onClick={() => handleSessionSelect('Virtual')}
-          >
-            Virtual
-          </button>
-          <button 
-            className="w-36 p-4 bg-[#fb6f92] text-white rounded-lg hover:bg-[#fb6f92]/90 transition-colors"
-          >
-            Submit
-          </button>
+          {['In-Person', 'Virtual'].map((session) => (
+            <button
+              key={session}
+              className={`w-36 p-4 border-2 rounded-full transition-all duration-300 ${
+                formData.selectedSession === session
+                  ? 'bg-[#fb6f92] text-white border-[#fb6f92]'
+                  : 'border-[#fb6f92] text-[#fb6f92] hover:bg-[#fb6f92]/10'
+              }`}
+              onClick={() => handleSessionSelect(session)}
+            >
+              {session}
+            </button>
+          ))}
+          <div className="flex flex-col items-center gap-2">
+            <button
+              className={`w-36 p-4 rounded-lg transition-colors duration-300 ${
+                isFormValid ? 'bg-[#fb6f92] text-white hover:bg-[#fb6f92]/90' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              }`}
+              onClick={() => {
+                const emptyFields = ['fullName', 'companyName', 'mobile', 'address'].filter(field => !formData[field]);
+                setFormErrors(emptyFields);
+
+                if (emptyFields.length > 0) {
+                  alert(`Please fill in the following fields: ${emptyFields.join(', ')}`);
+                  return;
+                }
+
+                if (!formData.selectedDate) {
+                  alert('Please select a date for the workshop!');
+                  return;
+                }
+
+                if (!formData.selectedSession) {
+                  alert('Please choose a preferred session type!');
+                  return;
+                }
+
+                handleSubmit();
+                setFormSubmitted(true);
+                alert('Form submitted successfully!');
+              }}
+              disabled={!isFormValid}
+            >
+              Submit
+            </button>
+            {!isFormValid && (
+              <p className="text-red-500 text-sm text-center mt-2">
+                Please fill in all required fields
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </section>
+
 
 
 {/* Menstrual Waste Statistics Section */}
@@ -475,8 +537,78 @@ const Community = () => {
 </section>
 
 
+{/*Social Feed */}
+<section className="container mx-auto px-4 mt-[20px]">
+  <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">Social Feed</h2>
+
+  {/* Social Media Icons */}
+  <div className="flex justify-center gap-6 mb-8">
+    <div className={`p-3 rounded-full flex items-center justify-center transition-transform duration-200 ${currentTab === 'instagram' ? 'bg-[#FB6F92] scale-125 w-[50px] h-[50px]' : 'bg-[#FB6F92] w-[40px] h-[40px]'}`} onClick={() => setCurrentTab('instagram')} style={{ boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
+      <Instagram className="text-white w-[24px] h-[24px]" />
+    </div>
+    <div className={`p-3 rounded-full flex items-center justify-center transition-transform duration-200 ${currentTab === 'threads' ? 'bg-[#FB6F92] scale-125 w-[50px] h-[50px]' : 'bg-[#FB6F92] w-[40px] h-[40px]'}`} onClick={() => setCurrentTab('threads')} style={{ boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
+      <img src={Thread} alt="Threads" className="w-6 h-6" />
+    </div>
+    <div className={`p-3 rounded-full flex items-center justify-center transition-transform duration-200 ${currentTab === 'youtube' ? 'bg-[#FB6F92] scale-125 w-[50px] h-[50px]' : 'bg-[#FB6F92] w-[40px] h-[40px]'}`} onClick={() => setCurrentTab('youtube')} style={{ boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
+      <Youtube className="text-white w-[24px] h-[24px]" />
+    </div>
+  </div>
+
+  {/* Content Container */}
+  <div 
+    className="mx-auto bg-[#FB6F92] p-4 rounded-[10px] w-full max-w-[1285px] flex justify-center"
+    style={{ height: 'auto', minHeight: '300px' }}
+  >
+    {currentTab === 'instagram' && (
+      <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+        {/* Post Component */}
+        {[{title: 'Meet Prerana', img: ig1}, {title: 'Introducing ZeroPad', img: ig2}].map((post, index) => (
+          <div key={index} className="bg-white rounded-2xl p-2 shadow-lg w-full max-w-[352px] h-[400px] flex flex-col items-center">
+            <div className="flex items-center gap-3">
+              <img src={logo} alt="Logo" className="w-8 h-8 rounded-full" />
+              <h3 className="text-lg font-bold">{post.title}</h3>
+            </div>
+            <p className="hidden md:block text-gray-700 mt-2 text-center">This is the description for {post.title}'s post. It’s only visible on larger screens.</p>
+            <div className="rounded-xl overflow-hidden mt-0 mb-0 flex-1 w-full">
+              <img 
+                src={post.img}
+                alt={post.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {currentTab === 'youtube' && (
+      <div className="flex justify-center">
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/your-video-id" title="YouTube video player" frameBorder="0" allowFullScreen></iframe>
+      </div>
+    )}
+  </div>
+</section>
+
+<script>
+  const [currentTab, setCurrentTab] = React.useState('instagram');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {/* Educating Section*/}
-<div className="min-h-screen flex flex-col items-center py-12">
+<div className="min-h-screen flex flex-col items-center py-12 mt-[50px]">
       {/* Heading (Outside the Colored Box) */}
       <h1 className="text-black font-bold text-3xl lg:text-4xl mb-6">
         Educating the Society!
@@ -484,7 +616,7 @@ const Community = () => {
 
       {/* Tabs (Buttons) */}
       <div className="flex flex-wrap justify-center gap-4 mb-6">
-        {["videos", "articles"].map((tab) => (
+        {["videos", "articles","infographs"].map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}

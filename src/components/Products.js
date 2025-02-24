@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import ProductBackground from './images/Mask group .png'; // Ensure this path is correct
 import { GraduationCap, Briefcase, Users, User } from 'lucide-react';
 import m1 from '../Images/medi1.png';
@@ -13,7 +14,22 @@ import img3 from '../Images/Gallery/Group 900.png';
 import img4 from '../Images/Gallery/Group 901.png';
 import img5 from '../Images/Gallery/Group 902.png';
 import img6 from '../Images/Gallery/Group 903.png';
+import image from '../Images/Gallery/Group 905.png';
+import certificate from '../Images/Gallery/image 191.png';
 import final from '../Images/final.png';
+
+import f1 from '../Images/Features/f1.gif';
+import f2 from '../Images/Features/f2.gif';
+import f3 from '../Images/Features/f3.gif';
+import f4 from '../Images/Features/f4.gif';
+import f5 from '../Images/Features/f5.gif';
+import f6 from '../Images/Features/f6.gif';
+import f7 from '../Images/Features/f7.gif';
+import f8 from '../Images/Features/f8.gif';
+import f9 from '../Images/Features/f9.gif';
+import f10 from '../Images/Features/f10.gif';
+
+
 
 
 const images = [img1, img2, img3, img4, img5, img6];
@@ -21,16 +37,16 @@ const images = [img1, img2, img3, img4, img5, img6];
 
 
 const features = [
-  { img: "/images/less-emission.png", title: "Less Emission" },
-  { img: "/images/improved-design.png", title: "Improved Design" },
-  { img: "/images/auto-switch-off.png", title: "Auto Switch-Off" },
-  { img: "/images/easy-install.png", title: "Easy to Install" },
-  { img: "/images/low-cost.png", title: "Low Operational Cost Per Pad" },
-  { img: "/images/high-temp.png", title: "High Chamber Temp." },
-  { img: "/images/optimized-ratio.png", title: "Optimized Air Fuel Ratio" },
-  { img: "/images/high-efficiency.png", title: "Higher Efficiency" },
-  { img: "/images/safe-body-temp.png", title: "Safe Body Temp. & Short Circuit Proof" },
-  { img: "/images/certified.png", title: "Certified by Authority" },
+  { img: f1, title: "Less Emission" },
+  { img: f2, title: "Improved Design" },
+  { img: f3, title: "Auto Switch-Off" },
+  { img: f4, title: "Easy to Install" },
+  { img: f5, title: "Low Operational Cost Per Pad" },
+  { img: f6, title: "High Chamber Temp." },
+  { img: f7, title: "Optimized Air Fuel Ratio" },
+  { img: f8, title: "Higher Efficiency" },
+  { img: f9, title: "Safe Body Temp. & Short Circuit Proof" },
+  { img: f10, title: "Certified by Authority" },
 ];
 
 const beneficiaries = [
@@ -57,16 +73,14 @@ const beneficiaries = [
 ];
 
 
-
-
-
-
-
 const Products = () => {
   const [selectedSession, setSelectedSession] = useState('');
 const handleSessionSelect = (session) => {
   setSelectedSession(session);
 };
+
+
+
   return (
     <div>
 
@@ -163,18 +177,30 @@ const handleSessionSelect = (session) => {
 
 {/* Product features */}
 
-    <section className="bg-white py-16 text-center">
+
+<motion.section
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, ease: 'easeOut' }}
+      className="bg-white py-16 text-center"
+    >
       <h2 className="text-2xl font-bold mb-8">Product Features</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-5xl mx-auto pt-10">
         {features.map((feature, index) => (
-          <div key={index} className="flex flex-col items-center">
-            <img src={feature.img} alt={feature.title} className="w-14 h-14 mb-4" />
-            <p className="text-sm font-bold">{feature.title}</p>  
-
-          </div>
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: index * 0.1 }}
+            className="flex flex-col items-center"
+          >
+            <img src={feature.img} alt={feature.title} className="w-24 h-24 mb-4" />
+            <p className="text-sm font-bold">{feature.title}</p>
+          </motion.div>
         ))}
       </div>
-    </section>
+    </motion.section>
+
 
 
 {/* Benifits*/}
@@ -263,26 +289,64 @@ const handleSessionSelect = (session) => {
 </div>
 
 {/* Gallery - Added mt-5 */}
-<section className="py-0 px-6 md:px-20 mt-[10px] md:mt-[30px]">
-  <h2 className="text-3xl font-bold text-center text-gray-900 mb-10">The Product</h2>
-  
-  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-fr">
-    {images.map((src, index) => (
-      <div
-        key={index}
-        className={`overflow-hidden rounded-lg shadow-lg ${
-          index === 0 ? "col-span-2 row-span-2" : "col-span-1 row-span-1"
-        }`}
-      >
-        <img
-          src={src}
-          alt={`Product ${index + 1}`}
-          className="w-full h-full object-cover"
-        />
-      </div>
-    ))}
-  </div>
-</section>
+
+<section className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-8">The Product</h2>
+
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 aspect-[3/4] sm:aspect-[16/12] lg:aspect-[16/10]">
+            {/* Left Column */}
+            <div className="flex flex-col gap-3 sm:gap-4">
+              <div className="relative overflow-hidden h-[33%] sm:h-[45%]">
+                <img 
+                  src={images[0]} 
+                  alt="Product 1" 
+                  className="w-full h-full object-contain bg-gray-50  p-0"
+                />
+              </div>
+              <div className="relative overflow-hidden  h-[33%] sm:h-[25%]">
+                <img 
+                  src={images[1]} 
+                  alt="Product 2" 
+                  className="w-full h-full object-contain bg-gray-50 p-0"
+                />
+              </div>
+              <div className="relative overflow-hidden  h-[33%] sm:h-[30%]">
+                <img 
+                  src={images[2]} 
+                  alt="Product 3" 
+                  className="w-full h-full object-contain bg-gray-50 p-0"
+                />
+              </div>
+            </div>
+
+            {/* Right Column */}
+            <div className="flex flex-col gap-3 sm:gap-4">
+              <div className="relative overflow-hidden  h-[33%] sm:h-[35%]">
+                <img 
+                  src={images[3]} 
+                  alt="Product 4" 
+                  className="w-full h-full object-contain bg-gray-50  p-0"
+                />
+              </div>
+              <div className="relative overflow-hidden h-[33%] sm:h-[40%]">
+                <img 
+                  src={images[4]} 
+                  alt="Product 5" 
+                  className="w-full h-full object-contain bg-gray-50 p-0"
+                />
+              </div>
+              <div className="relative overflow-hidden h-[33%] sm:h-[25%]">
+                <img 
+                  src={images[5]} 
+                  alt="Product 6" 
+                  className="w-full h-full object-contain bg-gray-50  p-0"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
 
 {/* Capabilities - Added mt-5 */}
@@ -302,29 +366,50 @@ const handleSessionSelect = (session) => {
 
   {/* Footer Section with Buttons */}
   <div className="bg-[#FB6F92] flex justify-center gap-4 py-5">
-  <button
-            className={`w-36 p-4 border-2 rounded-full transition-all duration-300 ${
-              selectedSession === 'In-Person' 
-                ? 'bg-white text-[#fb6f92] ' 
-                : 'border-white text-white hover:bg-[#fb6f92]/10'
-            }`}
-            onClick={() => handleSessionSelect('In-Person')}
-          >
-           E-Broucher
-          </button>
-          <button
-            className={`w-36 p-4 border-2 rounded-full transition-all duration-300 ${
-              selectedSession === 'Virtual' 
-                ? 'bg-white text-[#fb6f92]' 
-                : 'border-white  text-white hover:bg-[#fb6f92]/10'
-            }`}
-            onClick={() => handleSessionSelect('Virtual')}
-          >
-           How to use?
-          </button>
-  </div>
+  {/* E-Brochure Button */}
+  <a
+     href="/Zeropad document.pdf" // Replace with your actual PDF path
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-36 p-4 border-2 rounded-full transition-all duration-300
+      bg-white text-[#FB6F92] border-white
+      hover:bg-[#FB6F92] hover:text-white"
+  >
+    E-Brochure
+  </a>
+
+  {/* How to Use Button */}
+  <a
+    href="https://youtu.be/82GtROuJars?feature=shared" // Replace with your actual link
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-36 p-4 border-2 rounded-full transition-all duration-300
+      bg-white text-[#FB6F92] border-white
+      hover:bg-[#FB6F92] hover:text-white"
+  >
+    How to Use?
+  </a>
+</div>
+
 </section>
 
+{/* Certificates*/}
+
+<section className="py-10 px-6 md:px-20 flex flex-col items-center">
+  <img 
+    src={image}
+    alt="Certificate" 
+    className="rounded-lg shadow-lg mb-6"
+    style={{ width: 'auto' }}
+  />
+  <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">Certification(s)</h2>
+  <img 
+    src={certificate}
+    alt="Official Certificate" 
+    className="rounded-lg shadow-lg"
+    style={{ width: 'auto' }}
+  />
+</section>
 
 
 
