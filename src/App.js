@@ -6,6 +6,8 @@ import About from "./components/About";
 import Products from "./components/Products";
 import Corporate from "./components/Corporate";
 import Community from "./components/Community";
+import "bootstrap/dist/css/bootstrap.min.css"; 
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const App = () => {
   return (

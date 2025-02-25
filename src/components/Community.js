@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CommunityImage from './images/Community1.png';
 import CommunityImage2 from './images/community2.png';
 import Story1 from './images/blog_2 1.png'; // Correct import
@@ -19,7 +19,18 @@ import ig1 from '../Images/Gallery/igImage2.png';
 import ig2 from '../Images/Gallery/igImage1.png';
 import Thread from '../Images/Thread.png';
 
- 
+const InstagramPost = {
+  id: '',
+  caption: '',
+  media_url: '',
+  permalink: '',
+  timestamp: ''
+};
+
+
+
+
+
 
 const Community = () => {
     const stories = [
@@ -121,7 +132,7 @@ const Community = () => {
     
         const [activeTab, setActiveTab] = useState("videos");
 
-        const [currentTab, setCurrentTab] = useState("instagram");
+        
         // const [selectedSession, setSelectedSession] = useState(null);
 
   // // Function to handle button click
@@ -195,6 +206,61 @@ const Community = () => {
       }`;
 
 
+      
+      const [currentTab, setCurrentTab] = useState('instagram');
+      const [posts, setPosts] = useState([]);
+      const [isLoading, setIsLoading] = useState(false);
+      const [error, setError] = useState(false);
+      const [profile, setProfile] = useState({
+        username: '_zeropad_',
+        profile_picture_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=50&h=50&fit=crop'
+      });
+
+
+      const fetchInstagramPosts = async () => {
+        try {
+          setIsLoading(true);
+          setError(false);
+      
+          // Simulated API response for now - replace with actual API call
+          const mockPosts = [
+            {
+              id: '1',
+              caption: 'Say hello to Prerana! Prerana is here to guide, support, and inspire your journey with Zeropad.',
+              media_url: 'https://images.unsplash.com/photo-1586769852044-692d6e3703f0?w=500&h=500&fit=crop',
+              permalink: 'https://www.instagram.com/p/example1',
+              timestamp: '2024-03-15T10:00:00Z'
+            },
+            {
+              id: '2',
+              caption: 'Introducing ZeroPad! Say goodbye to unhygienic waste disposal.',
+              media_url: 'https://images.unsplash.com/photo-1586769852044-692d6e3703f0?w=500&h=500&fit=crop',
+              permalink: 'https://www.instagram.com/p/example2',
+              timestamp: '2024-03-14T09:00:00Z'
+            },
+            {
+              id: '3',
+              caption: 'Transform the way you handle waste with ZeroPad.',
+              media_url: 'https://images.unsplash.com/photo-1586769852044-692d6e3703f0?w=500&h=500&fit=crop',
+              permalink: 'https://www.instagram.com/p/example3',
+              timestamp: '2024-03-13T08:00:00Z'
+            }
+          ];
+      
+          setPosts(mockPosts);
+          setIsLoading(false);
+        } catch (error) {
+          console.error('Error fetching Instagram posts:', error);
+          setError(true);
+          setIsLoading(false);
+        }
+      };
+      
+      useEffect(() => {
+        fetchInstagramPosts();
+      }, []);
+      
+    
 
 
 
@@ -342,7 +408,7 @@ const Community = () => {
     {/* First Row */}
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
       <div className="flex justify-center md:justify-start w-full">
-        <div className="relative w-full max-w-[400px] sm:w-[70%] md:w-[60%] lg:w-[70%] aspect-[7/5]">
+        <div className="relative w-full max-w-[400px] sm:w-[70%] md:w-[60%] lg:w-[70%] aspect-[7/5]  ml-0  p-0">
           <img src={initiatives1} alt="Initiative 1" className="w-full h-full object-cover rounded-lg shadow-lg" />
         </div>
       </div>
@@ -539,59 +605,78 @@ const Community = () => {
 
 {/*Social Feed */}
 <section className="container mx-auto px-4 mt-[20px]">
-  <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">Social Feed</h2>
+      <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">Social Feed</h2>
+      <div className="flex justify-center gap-6 mb-8">
+        <button
+          className={`p-3 rounded-full flex items-center justify-center transition-all duration-200 ${
+            currentTab === 'instagram'
+              ? 'bg-[#FB6F92] scale-125 w-[50px] h-[50px]'
+              : 'bg-[#FB6F92] hover:scale-110 w-[40px] h-[40px]'
+          }`}
+          onClick={() => setCurrentTab('instagram')}
+          style={{ boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}
+        >
+          <Instagram className="text-white w-[24px] h-[24px]" />
+        </button>
+        <button
+          className={`p-3 rounded-full flex items-center justify-center transition-all duration-200 ${
+            currentTab === 'youtube'
+              ? 'bg-[#FB6F92] scale-125 w-[50px] h-[50px]'
+              : 'bg-[#FB6F92] hover:scale-110 w-[40px] h-[40px]'
+          }`}
+          onClick={() => setCurrentTab('youtube')}
+          style={{ boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}
+        >
+          <Youtube className="text-white w-[24px] h-[24px]" />
+        </button>
+      </div>
 
-  {/* Social Media Icons */}
-  <div className="flex justify-center gap-6 mb-8">
-    <div className={`p-3 rounded-full flex items-center justify-center transition-transform duration-200 ${currentTab === 'instagram' ? 'bg-[#FB6F92] scale-125 w-[50px] h-[50px]' : 'bg-[#FB6F92] w-[40px] h-[40px]'}`} onClick={() => setCurrentTab('instagram')} style={{ boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
-      <Instagram className="text-white w-[24px] h-[24px]" />
-    </div>
-    <div className={`p-3 rounded-full flex items-center justify-center transition-transform duration-200 ${currentTab === 'threads' ? 'bg-[#FB6F92] scale-125 w-[50px] h-[50px]' : 'bg-[#FB6F92] w-[40px] h-[40px]'}`} onClick={() => setCurrentTab('threads')} style={{ boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
-      <img src={Thread} alt="Threads" className="w-6 h-6" />
-    </div>
-    <div className={`p-3 rounded-full flex items-center justify-center transition-transform duration-200 ${currentTab === 'youtube' ? 'bg-[#FB6F92] scale-125 w-[50px] h-[50px]' : 'bg-[#FB6F92] w-[40px] h-[40px]'}`} onClick={() => setCurrentTab('youtube')} style={{ boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
-      <Youtube className="text-white w-[24px] h-[24px]" />
-    </div>
-  </div>
-
-  {/* Content Container */}
-  <div 
-    className="mx-auto bg-[#FB6F92] p-4 rounded-[10px] w-full max-w-[1285px] flex justify-center"
-    style={{ height: 'auto', minHeight: '300px' }}
-  >
-    {currentTab === 'instagram' && (
-      <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-        {/* Post Component */}
-        {[{title: 'Meet Prerana', img: ig1}, {title: 'Introducing ZeroPad', img: ig2}].map((post, index) => (
-          <div key={index} className="bg-white rounded-2xl p-2 shadow-lg w-full max-w-[352px] h-[400px] flex flex-col items-center">
-            <div className="flex items-center gap-3">
-              <img src={logo} alt="Logo" className="w-8 h-8 rounded-full" />
-              <h3 className="text-lg font-bold">{post.title}</h3>
-            </div>
-            <p className="hidden md:block text-gray-700 mt-2 text-center">This is the description for {post.title}'s post. It’s only visible on larger screens.</p>
-            <div className="rounded-xl overflow-hidden mt-0 mb-0 flex-1 w-full">
-              <img 
-                src={post.img}
-                alt={post.title}
-                className="w-full h-full object-cover"
-              />
-            </div>
+      <div className="mx-auto bg-[#FB6F92] p-4 rounded-[10px] w-full max-w-[1285px]" style={{ minHeight: '300px' }}>
+        {currentTab === 'instagram' && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+            {posts.map((post) => (
+              <a
+                key={post.id}
+                href={post.permalink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white rounded-2xl p-4 shadow-lg w-full max-w-[352px] hover:transform hover:scale-105 transition-transform duration-200"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <img
+                    src={profile.profile_picture_url}
+                    alt={profile.username}
+                    className="w-10 h-10 rounded-full object-cover border-2 border-[#FB6F92]"
+                  />
+                  <div>
+                    <h3 className="font-semibold text-gray-900">{profile.username}</h3>
+                    <p className="text-xs text-gray-500">{new Date(post.timestamp).toLocaleDateString()}</p>
+                  </div>
+                </div>
+                <div className="rounded-xl overflow-hidden mb-4 aspect-square">
+                  <img src={post.media_url} alt="Post content" className="w-full h-full object-cover" />
+                </div>
+                <p className="text-sm text-gray-700 line-clamp-3">{post.caption}</p>
+              </a>
+            ))}
           </div>
-        ))}
-      </div>
-    )}
+        )}
 
-    {currentTab === 'youtube' && (
-      <div className="flex justify-center">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/your-video-id" title="YouTube video player" frameBorder="0" allowFullScreen></iframe>
+        {currentTab === 'youtube' && (
+          <div className="flex justify-center">
+            <iframe
+              width="100%"
+              height="515"
+              src="https://www.youtube.com/embed/82GtROuJars"
+              title="YouTube video player"
+              frameBorder="0"
+              allowFullScreen
+              className="rounded-xl max-w-4xl"
+            />
+          </div>
+        )}
       </div>
-    )}
-  </div>
-</section>
-
-<script>
-  const [currentTab, setCurrentTab] = React.useState('instagram');
-</script>
+    </section>
 
 
 

@@ -40,7 +40,7 @@ const About = () => {
   return (
     <div style={{ fontFamily: 'Raleway, sans-serif' }}>
       <section
-        className="relative w-full min-h-[135vh] lg:min-h-[170vh] flex flex-col justify-start items-center bg-center bg-cover bg-no-repeat px-6 md:px-12 pt-12 md:pt-16 lg:pt-24 pb-24"
+        className="relative w-full min-h-[135vh] lg:min-h-[170vh] h-[130vh] flex flex-col justify-start items-center bg-center bg-cover bg-no-repeat px-6 md:px-12 pt-12 md:pt-16 lg:pt-24 pb-24"
         style={{
           backgroundImage: `url(${rectangleBackground}), url(${background})`,
           backgroundSize: "cover, cover",
@@ -63,47 +63,56 @@ const About = () => {
 
       {/* Vision & Mission Section */}
       <div className="relative w-full lg:-mt-64">
-        <div className="container mx-auto max-w-[100%] flex flex-col lg:flex-row items-center lg:justify-between gap-0 space-y-8 mt-5">
-          <div className="flex-1 text-black text-lg md:text-xl lg:text-2xl text-justify leading-relaxed px-4 sm:px-6 md:px-8 lg:pr-8 lg:mt-40 lg:ml-8">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-raleway text-black mb-4 sm:mb-6 text-center md:text-left">
-              VISION
-            </h2>
-            <p className="mb-4 sm:mb-6 text-base sm:text-lg md:text-xl leading-normal sm:leading-relaxed">
-              Ecosense Appliances, with Zeropad, aims to revolutionize menstrual waste management by offering sustainable and hygienic solutions that will empower individuals and communities to prioritize both health and the environment. We envision a future where menstrual hygiene management is a priority, and responsible waste disposal leads to a cleaner, healthier world.
-            </p>
-          </div>
 
+        <div className="container-fluid px-0 mt-5">
+          <div className="row align-items-center flex-row-reverse ">
+            {/* Right Side Image - Decrease Width on Large Screens */}
+            <div className="col-lg-5 col-md-6 col-sm-10 col-12 mx-auto">
+              <img
+                src={visionImg}
+                alt="Corporate 2"
+                className="w-100 h-auto rounded-lg shadow-lg"
+              />
+            </div>
 
-          <div className="flex-1 flex justify-center lg:justify-end mt-20">
-            <img
-              src={visionImg}
-              alt="Vision"
-              className="w-[100%] lg:w-[100%] h-[280px] lg:h-[600px] object-cover rounded-lg shadow-lg"
-            />
-          </div>
-        </div>
+            {/* Left Side Text */}
+            <div className="flex-1 text-black text-lg md:text-xl lg:text-2xl text-justify leading-relaxed px-4 sm:px-6 md:px-8 lg:pr-8 lg:mt-60 lg:ml-8">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-raleway text-black mb-4 sm:mb-6 text-center md:text-left lg:mt-60 mt-10">
+                VISION
+              </h2>
+              <p className="mb-4 sm:mb-6 text-base sm:text-lg md:text-xl leading-normal sm:leading-relaxed">
+                Ecosense Appliances, with Zeropad, aims to revolutionize menstrual waste management by offering sustainable and hygienic solutions that will empower individuals and communities to prioritize both health and the environment. We envision a future where menstrual hygiene management is a priority, and responsible waste disposal leads to a cleaner, healthier world.
+              </p>
+            </div>
 
-
-        <div className="container mx-auto max-w-[100%] flex flex-col lg:flex-row-reverse items-center lg:justify-between gap-0 space-y-8 mt-5">
-          <div className="flex-1 text-black text-lg md:text-xl lg:text-2xl text-justify leading-relaxed px-4 sm:px-6 md:px-8 lg:pl-8 lg:mb-40 lg:mr-6">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-raleway text-black mb-4 sm:mb-6 text-center md:text-left">
-              MISSION
-            </h2>
-            <p className="mb-4 sm:mb-6 text-base sm:text-lg md:text-xl leading-normal sm:leading-relaxed">
-              Ecosense Appliances is dedicated to improving personal hygiene, promoting sustainability, and handling women's health waste with care. Our mission is to provide innovative, eco-friendly solutions that simplify waste management, reduce landfill impact, and create a cleaner future. With ZeroPad, make your waste disposal routine responsible, hygienic, and sustainable—one napkin at a time.
-            </p>
-          </div>
-
-
-          <div className="flex-1 flex justify-center lg:justify-start mt-20">
-            <img
-              src={missionImg}
-              alt="Mission"
-              className="w-[100%] lg:w-[100%] h-[280px] lg:h-[700px] object-cover rounded-lg shadow-lg"
-            />
           </div>
         </div>
 
+
+        <div className="container-fluid px-0 mt-16">
+          <div className="row align-items-center">
+            {/* Left Side Image - Decrease Width on Large Screens */}
+            <div className="col-lg-5 col-md-6 col-sm-10 col-12 mx-auto gap-5">
+              <img
+                src={missionImg}
+                alt="Corporate 1"
+                className="w-100 h-auto rounded-lg shadow-lg"
+              />
+            </div>
+
+            {/* Right Side Text */}
+            <div className="flex-1 text-black text-lg md:text-xl lg:text-2xl text-justify leading-relaxed px-4 sm:px-6 md:px-8 lg:pl-8 lg:mb-40 lg:mr-6">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-raleway text-black mb-4 sm:mb-6 text-center md:text-left mt-10">
+                MISSION
+              </h2>
+              <p className="mb-4 sm:mb-6 text-base sm:text-lg md:text-xl leading-normal sm:leading-relaxed">
+                Ecosense Appliances is dedicated to improving personal hygiene, promoting sustainability, and handling women's health waste with care. Our mission is to provide innovative, eco-friendly solutions that simplify waste management, reduce landfill impact, and create a cleaner future. With ZeroPad, make your waste disposal routine responsible, hygienic, and sustainable—one napkin at a time.
+              </p>
+            </div>
+
+
+          </div>
+        </div>
 
 
 

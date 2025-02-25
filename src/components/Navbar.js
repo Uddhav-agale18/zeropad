@@ -11,74 +11,69 @@ const Navbar = () => {
   };
 
   return (
-    <header className="w-full bg-white shadow-md p-4 flex justify-between items-center">
+    <header className="w-full bg-white shadow-md px-10 py-3 flex justify-between items-center" style={{ fontFamily: 'Raleway, sans-serif' }}>
       {/* Logo */}
-      <img src={logo} alt="Zeropad Logo" className="h-10" />
-
-      {/* Hamburger Icon for mobile */}
-      <button
-        className="md:hidden text-gray-700 focus:outline-none"
-        onClick={toggleSidebar}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
-      </button>
+      <a href="/">
+        <img src={logo} alt="Zeropad Logo" className="h-12" />
+      </a>
 
       {/* Desktop Navbar */}
       <nav className="hidden md:flex">
-        <ul className="flex space-x-6 text-gray-700">
+        <ul className="flex space-x-8 font-medium">
           <li>
-            <a href="#" className="hover:text-black">Home</a>
+            <a href="/" className="text-black no-underline hover:text-black transition duration-300">Home</a>
           </li>
           <li>
-            <a href="#" className="hover:text-black">About</a>
+            <a href="/about" className="text-black no-underline hover:text-black transition duration-300">About</a>
           </li>
           <li>
-            <a href="/products" className="hover:text-black">Product</a>
+            <a href="/products" className="text-black no-underline hover:text-black transition duration-300">Products</a>
           </li>
           <li>
-            <a href="/Community" className="hover:text-black">Community</a>
+            <a href="/community" className="text-black no-underline hover:text-black transition duration-300">Community</a>
           </li>
           <li>
-            <a href="/corporate" className="hover:text-black">Corporate</a>
+            <a href="/corporate" className="text-black no-underline hover:text-black transition duration-300">Corporate</a>
           </li>
           <li>
-            <a href="/contact" className="hover:text-black">Contact</a>
+            <a href="/contact" className="text-black no-underline hover:text-black transition duration-300">Contact</a>
           </li>
         </ul>
       </nav>
 
-      {/* Mobile Sidebar */}
-      <div
-        className={`fixed inset-0 bg-gray-700 bg-opacity-50 z-50 md:hidden ${
-          isSidebarOpen ? "block" : "hidden"
-        }`}
-        onClick={toggleSidebar} // Close sidebar when clicking outside
-      ></div>
+      {/* Mobile Menu Button */}
+      <button
+        className="md:hidden text-black focus:outline-none"
+        onClick={toggleSidebar}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-8 w-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      {/* Sidebar Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          onClick={toggleSidebar} // Close sidebar when clicking outside
+        ></div>
+      )}
 
       {/* Sidebar Menu */}
       <div
-        className={`fixed top-0 left-0 w-64 h-full bg-white shadow-lg z-50 md:hidden ${
-          isSidebarOpen ? "block" : "hidden"
-        }`}
+        className={`fixed top-0 left-0 w-64 h-full bg-white shadow-lg z-50 md:hidden transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300`}
       >
-        <div className="flex justify-end p-4">
-          <button
-            className="text-gray-700 focus:outline-none"
-            onClick={toggleSidebar}
-          >
+        <div className="flex justify-between items-center p-4 border-b">
+          <img src={logo} alt="Zeropad Logo" className="h-10" />
+          <button className="text-black focus:outline-none" onClick={toggleSidebar}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -86,45 +81,28 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
-        <ul className="flex flex-col items-center space-y-6 p-6 text-gray-700">
+        <ul className="flex flex-col text-lg font-medium p-6 space-y-6">
           <li>
-            <a href="#" className="hover:text-black" onClick={toggleSidebar}>
-              Home
-            </a>
+            <a href="/" className="text-black no-underline hover:text-black transition duration-300" onClick={toggleSidebar}>Home</a>
           </li>
           <li>
-            <a href="#" className="hover:text-black" onClick={toggleSidebar}>
-              About
-            </a>
+            <a href="/about" className="text-black no-underline hover:text-black transition duration-300" onClick={toggleSidebar}>About</a>
           </li>
           <li>
-            <a href="/products" className="hover:text-black" onClick={toggleSidebar}>
-              Product
-            </a>
+            <a href="/products" className="text-black no-underline hover:text-black transition duration-300" onClick={toggleSidebar}>Products</a>
           </li>
           <li>
-            <a href="/Community" className="hover:text-black" onClick={toggleSidebar}>
-              Community
-            </a>
+            <a href="/community" className="text-black no-underline hover:text-black transition duration-300" onClick={toggleSidebar}>Community</a>
           </li>
           <li>
-            <a href="/corporate" className="hover:text-black" onClick={toggleSidebar}>
-              Corporate
-            </a>
+            <a href="/corporate" className="text-black no-underline hover:text-black transition duration-300" onClick={toggleSidebar}>Corporate</a>
           </li>
           <li>
-            <a href="/contact" className="hover:text-black" onClick={toggleSidebar}>
-              Contact
-            </a>
+            <a href="/contact" className="text-black no-underline hover:text-black transition duration-300" onClick={toggleSidebar}>Contact</a>
           </li>
         </ul>
       </div>
@@ -132,4 +110,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar;
